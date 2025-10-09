@@ -1,0 +1,49 @@
+.map-container {
+    height: 500px;
+    width: 100%;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.score-high,
+.score-medium,
+.score-low {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 8px;
+    min-width: 200px;
+}
+
+.score-high {
+    background-color: #04844b;
+    color: white;
+}
+
+.score-medium {
+    background-color: #ffb75d;
+    color: #080707;
+}
+
+.score-low {
+    background-color: #ea001e;
+    color: white;
+}
+
+.score-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.score-value {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}

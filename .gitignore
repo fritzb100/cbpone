@@ -46,3 +46,9 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
+
+# project readme
+README.md
+SETUP_GUIDE.md
+INTERVIEW_GUIDE.md
+DEPLOYMENT_CHECKLIST.md
