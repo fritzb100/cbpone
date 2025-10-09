@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CBP_Sector__c</fullName>
+    <label>CBP Sector</label>
+    <referenceTo>CBP_Sector_c__c</referenceTo>
+    <relationshipLabel>Port of Entries</relationshipLabel>
+    <relationshipName>Port_of_Entries</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
