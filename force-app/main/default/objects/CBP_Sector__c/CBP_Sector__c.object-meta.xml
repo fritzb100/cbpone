@@ -155,7 +155,6 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>CBP Sector</label>
     <nameField>
-        <encryptionScheme>None</encryptionScheme>
         <label>CBP Sector Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
