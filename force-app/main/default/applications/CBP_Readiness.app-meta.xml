@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>CBP_Home_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Error_Item_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Error_Item__c</pageOrSobjectType>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Error_Item_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Error_Item__c</pageOrSobjectType>
+    </actionOverrides>
     <brand>
         <headerColor>#0070D2</headerColor>
         <logo>cpblogo</logo>
@@ -15,21 +41,29 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>CBP Readiness</label>
     <navType>Console</navType>
-    <tabs>CBP_Sector_c__c</tabs>
+    <tabs>standard-home</tabs>
+    <tabs>CBP_Sector__c</tabs>
     <tabs>Port_of_Entry__c</tabs>
     <tabs>standard-report</tabs>
     <tabs>standard-Dashboard</tabs>
+    <tabs>Error_Item__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>CBP_Readiness_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
-            <tab>CBP_Sector_c__c</tab>
+            <tab>CBP_Sector__c</tab>
+        </mappings>
+        <mappings>
+            <tab>Error_Item__c</tab>
         </mappings>
         <mappings>
             <tab>Port_of_Entry__c</tab>
         </mappings>
         <mappings>
             <tab>standard-Dashboard</tab>
+        </mappings>
+        <mappings>
+            <tab>standard-home</tab>
         </mappings>
         <mappings>
             <tab>standard-report</tab>

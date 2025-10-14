@@ -102,12 +102,7 @@ sf apex run test --test-level RunLocalTests --result-format human --code-coverag
 # Expected: 100% coverage on all classes
 ```
 
----
 
-## 📚 Documentation
-
-- **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** - Complete deployment and configuration guide
-- **[INTERVIEW_GUIDE.md](./INTERVIEW_GUIDE.md)** - Interview prep, demo script, and Q&A
 
 ---
 
@@ -154,21 +149,5 @@ sf apex run test --test-level RunLocalTests --result-format human --code-coverag
 
 ---
 
-## 🤝 Contributing
 
-This is an interview demo project. Feel free to fork and extend!
 
----
-
-## 📄 License
-
-MIT License - See LICENSE file for details
-
----
-
-## 🙋 Questions?
-
-Built by **Fritz Bien-Aime** for Salesforce Developer interview preparation.
-
-For setup help, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)  
-For interview prep, see [INTERVIEW_GUIDE.md](./INTERVIEW_GUIDE.md)

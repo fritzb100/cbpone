@@ -52,6 +52,7 @@ public with sharing class ReadinessController {
             
         } catch (Exception e) {
             throw new AuraHandledException('Error initiating assessment: ' + e.getMessage());
+            ErrorLog.createErrorItem('ReadinessController', 'Port_of_Entry__c', 'assessReadiness', e.getMessage(), UserInfo.getUserId());
         }
     }
     

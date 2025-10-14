@@ -10,7 +10,7 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
     private static final String OPENAI_ENDPOINT = 'callout:OpenAI_Legacy/v1/chat/completions';
     private static final String MODEL = 'gpt-4o-mini'; // Cost-effective model
     
-    // Get API key from Custom Metadata (replace 'Default' with your record's DeveloperName)
+    // Get API key from https://platform.openai.com/settings/organization/api-keys
     private static final String API_KEY = openAiKey__mdt.getInstance('TheKey')?.Key__c; //TODO: update to external credential instead
     
     public ReadinessQueueable(Id portId) {
