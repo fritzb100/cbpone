@@ -2,12 +2,7 @@
 
 An AI-powered Salesforce application that predicts U.S. Customs and Border Protection deployment readiness across ports of entry using OpenAI integration.
 
-![Salesforce](https://img.shields.io/badge/Salesforce-00A1E0?style=flat&logo=salesforce&logoColor=white)
-![Lightning Web Components](https://img.shields.io/badge/LWC-0070D2?style=flat&logo=salesforce)
-![Apex](https://img.shields.io/badge/Apex-00A1E0?style=flat)
-![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat&logo=openai&logoColor=white)
 
----
 
 ## 📋 Overview
 
@@ -20,6 +15,8 @@ The **CBP Readiness Platform** enables real-time assessment of deployment readin
 ✅ **Real-Time Updates** - Client-side polling for status changes  
 ✅ **Secure Integration** - Named Credentials for API key management  
 ✅ **100% Test Coverage** - HttpCalloutMock for comprehensive testing  
+✅ **Robust Error handling** - Error item object captures the errors in the org 
+
 
 ---
 
@@ -42,6 +39,8 @@ CBP_Sector__c (Master)
 - **Apex Controller:** `ReadinessController` - Handles UI requests
 - **Queueable:** `ReadinessQueueable` - Async OpenAI callout
 - **Test Class:** `ReadinessQueueableTest` - 100% code coverage
+- **error Item** - `ErrorLog.cls ` - captures errors in the UI
+
 
 ---
 
@@ -71,6 +70,12 @@ See **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** for detailed Named Credential setup.
 1. Setup → Named Credentials → New
 2. Create External Credential with your OpenAI API key
 3. Create Named Credential: `OpenAI_NC` pointing to `https://api.openai.com`
+
+**External Credentials Not working?**
+1. use nameCredentials with custommetadata
+2. Create Custom Metadata Record - Steps to add your OpenAI API key to the openAiKey Custom Metadata Type
+3. Verify Legacy Named Credential - Confirms the OpenAI_Legacy Named Credential is properly configured
+
 
 ### 3. Load Sample Data
 ```bash
@@ -124,17 +129,6 @@ sf apex run test --test-level RunLocalTests --result-format human --code-coverag
 - ✅ Modern LWC (ES6+)
 
 ---
-
-## 📊 Project Stats
-
-| Metric | Value |
-|--------|-------|
-| Apex Classes | 3 |
-| LWC Components | 1 |
-| Custom Objects | 2 |
-| Custom Fields | 7 |
-| Test Coverage | 100% |
-| Lines of Code | ~500 |
 
 ---
 

@@ -70,11 +70,13 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
                 processSuccessResponse(res.getBody(), port);
             } else {
                 handleError('OpenAI API Error: ' + res.getStatus() + ' - ' + res.getBody(), port);
+                ErrorLog.createErrorItem('ReadinessQueueable', 'Port_of_Entry__c', 'execute', res.getBody(), UserInfo.getUserId());
             }
             
         } catch (Exception e) {
             handleError('Exception: ' + e.getMessage() + '\n' + e.getStackTraceString(), 
                        [SELECT Id FROM Port_of_Entry__c WHERE Id = :portId LIMIT 1]);
+                       ErrorLog.createErrorItem('ReadinessQueueable', 'Port_of_Entry__c', 'execute', e.getMessage(), UserInfo.getUserId());
         }
     }
     
@@ -141,6 +143,7 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
             
         } catch (Exception e) {
             handleError('Error parsing response: ' + e.getMessage() + '\nResponse: ' + responseBody, port);
+            ErrorLog.createErrorItem('ReadinessQueueable', 'Port_of_Entry__c', 'processSuccessResponse', e.getMessage(), UserInfo.getUserId());
         }
     }
     
