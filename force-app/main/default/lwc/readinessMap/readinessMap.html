@@ -4,7 +4,8 @@
             <!-- Map Component -->
             <lightning-map
                 map-markers={mapMarkers}
-                zoom-level="4"
+                center={mapCenter}
+                zoom-level={zoomLevel}
                 onmarkerselect={handleMarkerSelect}
                 class="map-container">
             </lightning-map>

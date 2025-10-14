@@ -10,6 +10,8 @@ export default class ReadinessMap extends LightningElement {
     @track selectedPort = null;
     @track showModal = false;
     @track isAssessing = false;
+    @track mapCenter = { location: { Latitude: 39.8283, Longitude: -98.5795 } }; // Default: US center
+    @track zoomLevel = 4;
     
     wiredPortsResult;
     pollInterval;
@@ -62,6 +64,15 @@ export default class ReadinessMap extends LightningElement {
         if (port) {
             this.selectedPort = port;
             this.showModal = true;
+            
+            // Center map on selected port
+            this.mapCenter = {
+                location: {
+                    Latitude: port.Geopoint__Latitude__s,
+                    Longitude: port.Geopoint__Longitude__s
+                }
+            };
+            this.zoomLevel = 10; // Zoom in to the port
         }
     }
     
@@ -69,6 +80,10 @@ export default class ReadinessMap extends LightningElement {
         this.showModal = false;
         this.selectedPort = null;
         this.stopPolling();
+        
+        // Reset map to default view
+        this.mapCenter = { location: { Latitude: 39.8283, Longitude: -98.5795 } };
+        this.zoomLevel = 4;
     }
     
     handleAssess() {

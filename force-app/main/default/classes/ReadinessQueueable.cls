@@ -6,9 +6,12 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
     
     private Id portId;
     
-    // OpenAI configuration - will be replaced with Named Credential
-    private static final String OPENAI_ENDPOINT = 'callout:OpenAI_NC/v1/chat/completions';
+    // OpenAI configuration
+    private static final String OPENAI_ENDPOINT = 'callout:OpenAI_Legacy/v1/chat/completions';
     private static final String MODEL = 'gpt-4o-mini'; // Cost-effective model
+    
+    // Get API key from Custom Metadata (replace 'Default' with your record's DeveloperName)
+    private static final String API_KEY = openAiKey__mdt.getInstance('TheKey')?.Key__c; //TODO: update to external credential instead
     
     public ReadinessQueueable(Id portId) {
         this.portId = portId;
@@ -16,6 +19,8 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
     
     public void execute(QueueableContext context) {
         try {
+            System.debug('Starting ReadinessQueueable for portId: ' + portId);
+            
             // Fetch port data
             Port_of_Entry__c port = [
                 SELECT Id, Name, Geopoint__Latitude__s, Geopoint__Longitude__s,
@@ -25,14 +30,18 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
                 LIMIT 1
             ];
             
+            System.debug('Port fetched: ' + port);
+            
             // Build prompt
             String prompt = buildPrompt(port);
+            System.debug('Prompt built successfully');
             
             // Make callout to OpenAI
             HttpRequest req = new HttpRequest();
             req.setEndpoint(OPENAI_ENDPOINT);
             req.setMethod('POST');
             req.setHeader('Content-Type', 'application/json');
+            req.setHeader('Authorization', 'Bearer ' + API_KEY);
             req.setTimeout(120000); // 120 seconds
             
             // Build request body
@@ -48,7 +57,7 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
                         'content' => prompt
                     }
                 },
-                'temperature' => 0.7,
+                'temperature' => 0.3,
                 'max_tokens' => 500
             };
             
@@ -73,25 +82,35 @@ public class ReadinessQueueable implements Queueable, Database.AllowsCallouts {
      * Builds the assessment prompt for OpenAI
      */
     private String buildPrompt(Port_of_Entry__c port) {
-        return String.format(
-            'Assess CBP readiness for deployment to {0} (Sector: {1}) located at coordinates {2}, {3}.\n\n' +
-            'Consider factors like:\n' +
-            '- Geographic location and accessibility\n' +
-            '- Proximity to major transportation hubs\n' +
-            '- Strategic importance of the location\n' +
-            '- Typical resource availability in this region\n\n' +
-            'Respond ONLY with a JSON object in this exact format:\n' +
-            '{{\n' +
+        System.debug('Building prompt for port: ' + port.Name);
+        System.debug('Sector: ' + port.CBP_Sector__r.Name);
+        System.debug('Coordinates: ' + port.Geopoint__Latitude__s + ', ' + port.Geopoint__Longitude__s);
+        
+        // Use simple string concatenation instead of String.format to avoid escaping issues
+        String prompt = 'You are a CBP deployment readiness analyst. Assess the readiness score for deploying CBP resources to: ' + port.Name + 
+            ' (Sector: ' + port.CBP_Sector__r.Name + ') at coordinates ' + 
+            port.Geopoint__Latitude__s + ', ' + port.Geopoint__Longitude__s + '.\n\n' +
+            'Scoring Guidelines:\n' +
+            '- 90-100: Major international hub, excellent infrastructure, high strategic value\n' +
+            '- 70-89: Significant port with good infrastructure, moderate strategic importance\n' +
+            '- 50-69: Regional port, adequate infrastructure, limited strategic value\n' +
+            '- 30-49: Small port, basic infrastructure, low priority\n' +
+            '- 0-29: Remote location, poor infrastructure, minimal strategic need\n\n' +
+            'Evaluate based on:\n' +
+            '1. Port size and international traffic volume (research the actual port)\n' +
+            '2. Infrastructure quality and accessibility\n' +
+            '3. Proximity to major cities and transportation networks\n' +
+            '4. Border security strategic importance\n' +
+            '5. Regional threat level and enforcement needs\n\n' +
+            'Be specific and vary scores meaningfully based on actual port characteristics.\n\n' +
+            'Respond ONLY with valid JSON:\n' +
+            '{\n' +
             '  "score": <number between 0-100>,\n' +
-            '  "reasoning": "<brief 2-3 sentence explanation>"\n' +
-            '}}',
-            new List<String>{
-                port.Name,
-                port.CBP_Sector__r.Name,
-                String.valueOf(port.Geopoint__Latitude__s),
-                String.valueOf(port.Geopoint__Longitude__s)
-            }
-        );
+            '  "reasoning": "<2-3 sentences explaining the score with specific factors>"\n' +
+            '}';
+        
+        System.debug('Generated prompt: ' + prompt);
+        return prompt;
     }
     
     /**
