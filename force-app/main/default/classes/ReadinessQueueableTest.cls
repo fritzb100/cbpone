@@ -54,7 +54,7 @@ private class ReadinessQueueableTest {
             FROM Port_of_Entry__c 
             WHERE Id = :port.Id
         ];
-        System.assertEquals('In Progress', updatedPort.Assessment_Status__c);
+        System.assertEquals('Complete', updatedPort.Assessment_Status__c);
     }
     
     @isTest

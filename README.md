@@ -2,7 +2,8 @@
 
 An AI-powered Salesforce application that predicts U.S. Customs and Border Protection deployment readiness across ports of entry using OpenAI integration.
 
-
+## Package URL
+https://login.salesforce.com/packaging/installPackage.apexp?p0=04tKa000002vzscIAA
 
 ## 📋 Overview
 
@@ -122,7 +123,6 @@ sf apex run test --test-level RunLocalTests --result-format human --code-coverag
 - ✅ Comprehensive error handling
 
 ### Code Quality
-- ✅ 100% test coverage
 - ✅ Clean separation of concerns
 - ✅ Documented with JavaDoc
 - ✅ SOLID principles
