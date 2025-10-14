@@ -1,12 +1,19 @@
 {
   "packageDirectories": [
     {
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
       "path": "force-app",
-      "default": true
+      "package": "cbpone",
+      "versionDescription": ""
     }
   ],
   "name": "cbpone",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "64.0"
+  "sourceApiVersion": "64.0",
+  "packageAliases": {
+    "cbpone": "0HoKa000000x0EiKAI",
+    "cbpone@0.1.0-1": "04tKa000002vzoFIAQ"
+  }
 }
