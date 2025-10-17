@@ -3,9 +3,8 @@
     <fullName>Average_Readiness__c</fullName>
     <description>Average readiness score across all ports in this sector</description>
     <label>Average Readiness</label>
-    <summarizedField>Port_of_Entry__c.Readiness_Score__c</summarizedField>
     <summaryForeignKey>Port_of_Entry__c.CBP_Sector__c</summaryForeignKey>
-    <summaryOperation>Count</summaryOperation>
+    <summaryOperation>count</summaryOperation>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Summary</type>
